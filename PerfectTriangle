@@ -1,0 +1,96 @@
+import math
+
+# The generate sidec function generates the hypotenuse of the right triangle using its two legs and the pythagorean theorem
+
+def generate_sidec(a,b):
+
+    c = math.sqrt(a**2+b**2)
+    return c
+
+# The Perimeter Function calculates the perimeter of a triangle given 3 sides
+
+def perimeter(a,b,c):
+
+    perimeter = float(a+b+c)
+    return perimeter
+
+# The Semi Perimeter Function calculates one half the perimeter (used in Heron's Formula)
+
+def semi_perimeter(perimeter):
+
+    semi_perimeter = (perimeter/2)
+    return semi_perimeter
+
+# The Heron's Area function calculates the area based on three sides and the semi perimeter using Heron's Formula 
+    
+def herons_area(a,b,c,semi):
+
+    area = float(math.sqrt(semi*(semi-a)*(semi-b)*(semi-c)))
+    area = round(area,1)
+    return area
+
+# The Perfect Triangle function uses boolean logic to determine whether the perimeter equals the area, or not
+
+def perfect_triangle(perimeter,area): 
+
+    if perimeter == area:
+        print(' The triangle is a perfect triangle!')
+    else:
+        print(' The triangle is not a perfect triangle.')
+
+# The main function will call all previous functions to determine whether the triangle is "perfect"
+
+def main():
+
+    # User input
+
+    sidea = float(input('Enter side a: '))
+    sideb = float(input('Enter side b: '))
+    print('')
+
+    # Generate side C
+
+    sidec = generate_sidec(sidea,sideb)
+
+    # Perimeter
+
+    peri = perimeter(sidea,sideb,sidec)
+
+    # Semi perimeter
+
+    semi = semi_perimeter(peri)
+
+    # Area
+
+    area = herons_area(sidea,sideb,sidec,semi)
+
+    # Perfect triangle
+
+    perfect_triangle(peri,area)
+
+    # Display output
+
+    print(' The perimeter is:',peri,'\n','The area is:',area)
+    
+# The menu function chooses the perfect triangle test or displays some perfect triangles to try
+
+def menu():
+
+    while True:
+        print('','\n',"1. Perfect Triangles Test",'\n','2. List Of Perfect Triangles','\n','3. Quit program')
+        select = input()
+        while select != '1' and select != '2' and select != '3':
+            print(' Invalid input!','\n','Please enter 1, 2, or 3')
+            select = input()
+        if select == '1':
+            main()
+        elif select == '2':
+            print('       Side Lengths','\n','\n','      Side:','a ','b ','c','\n','Triangle 1:',5,12,13,'\n','Triangle 2:',6,8,'',10)
+        else:
+            quit()
+
+# Header
+
+print(' A perfect triangle is one where the perimeter of the triangle equals its area.','\n','This program currently uses right triangles, for which a and b are given and c is not.','\n','Given the a and b value it will generate a triangle and display whether the triangle is "perfect."')
+
+menu()
